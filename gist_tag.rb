@@ -33,23 +33,23 @@ module Jekyll
          gist, options = get_options
          if !gist.empty?
 
-			# check for a 'cache/nocache' parameter
+            # check for a 'cache/nocache' parameter
             if options.length > 0
-              @cache_disabled = options[0] == "nocache"
+               @cache_disabled = options[0] == "nocache"
             end
 
-			# check for a filename parameter
-			file = options.length > 1 ? options[1] : String.new
+            # check for a filename parameter
+            file = options.length > 1 ? options[1] : String.new
 
-			# check for cached data or download from api
+            # check for cached data or download from api
             data = get_cached_gist(gist, file) || get_gist_from_web(gist, file)
 
-			# render the gist
+            # render the gist
             render_gist gist, file, data
          end
       end
 
-	  # simple outputs the script tag
+      # simply outputs the script tag
       def render_gist(gist, file, data)
          script_url = script_url_for gist, file
          html_output_for script_url, data
@@ -79,7 +79,7 @@ module Jekyll
          File.join @cache_folder, "#{gist}-#{file}-#{md5}.cache"
       end
 
-	  # downloads gist data from the web
+      # downloads gist data from the web
       def get_gist_from_web(gist, file)
          gist_url          = get_gist_url_for gist, file
          raw_uri           = URI.parse gist_url
@@ -102,11 +102,11 @@ module Jekyll
       # parses gist id and tag options
       def get_options
          if parts = @text.match(/([\d]*) (.*)/)
-         	return parts[1].strip, parts[2].split(",").map(&:strip)
+            return parts[1].strip, parts[2].split(",").map(&:strip)
          end
       end
 
-	  # simple outputs the script tag for the gist
+      # simple outputs the script tag for the gist
       def html_output_for(script_url, code)
          code = CGI.escapeHTML code
          <<-HTML
@@ -130,16 +130,16 @@ module Jekyll
    # Currently, Markdown files are handled
    class GistTagApi < GistTag
 
- 	def initialize(tag_name, text, token)
-      super
-    end
+      def initialize(tag_name, text, token)
+         super
+      end
 
       # returns the url for the gists json api
       def get_gist_url_for(gist, file)
          "https://api.github.com/gists/#{gist}"
       end
 
-	  # renders the gist by parsing the json
+      # renders the gist by parsing the json
       def render_gist(gist, file, data)
          json = JSON.parse(data)
 
@@ -156,7 +156,7 @@ module Jekyll
                next
             end
 
-			# raw gist content
+            # raw gist content
             data = info["content"]
 
             # render markdown ourselves
@@ -167,7 +167,7 @@ module Jekyll
                script_url = script_url_for(gist, name)
                code = CGI.escapeHTML data
                output << "<div><script src='#{script_url}'></script>"
-         	   output << "<noscript><pre><code>#{code}</code></pre></noscript></div>"
+               output << "<noscript><pre><code>#{code}</code></pre></noscript></div>"
             end
          end
          CGI.unescapeHTML(output)
