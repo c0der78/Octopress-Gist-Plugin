@@ -14,6 +14,6 @@ put *gist_tag.rb* file in **plugins directory**
 
 ``` markdown
 {% gistapi 12345 %}
-{% gistapi nocache %}
-{% gistapi cache some_file.txt %}
+{% gistapi 12345 nocache %}
+{% gistapi 12345 cache some_file.txt %}
 ```
