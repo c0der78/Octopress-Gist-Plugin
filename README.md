@@ -1,10 +1,10 @@
 ### Plugin to render gists in octopress
 
-I wanted to improve the gist plugin because I didn't like rendering Markdown files as code.
+I wanted to change the gist plugin to not render Markdown files as code, and let the site display them as HTML
 
-The **gistapi** tag will now render markdown files inside your page while other files are still displayed in a code block.
+The **gistapi** tag will use the gist API.  It can now detect file types.
 
-The **gist** tag has been preserved and modified to use parameters for cacheing.
+The **gist** tag has been preserved and modified to add parameters for cacheing.
 
 #### Installation
 
